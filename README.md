@@ -48,7 +48,6 @@ Before you can use the makeskill tool, you'll need to link:
 
 Then in the Makeskill folder, install all of its node module dependencies
 ```sh
-  cd makeskill
   npm install
 ```
 
