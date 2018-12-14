@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Makeskill Design Kit</title>
+<meta charset="utf-8">
+<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
+<title>dog_finder.rst</title>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap core CSS =================================================== -->
+<link href="./bootstrap/css/docs-min.css" rel="stylesheet">
+<link href="./bootstrap/css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="bootstrap/css/test.css" type="text/css" />
+</head>
+<body>
+<div class="bs-docs-header header">
+<div class="container">
+<p class="logo"><a class="reference external" href="./index.html">M</a></p>
+<ul class="nav-list simple">
+<li><a class="reference external" href="./index.html#id4">Gallery</a></li>
+<li><a class="reference external" href="./makeskill_cards.html">Design Resources</a></li>
+<li><a class="reference external" href="./makeskill_cli.html">Tech Docs</a></li>
+<li><a class="reference external" href="./about.html">About</a></li>
+<li><a class="reference external" href="./try_it.html">Try It</a></li>
+</ul>
+</div>
+
+</div>
+<div class="container">
+
+
+<div class="row">
+<div class="templates-header">
+<div class="templates-inner-container">
+<ul class="nav-list simple">
+<li><a class="reference external" href="./makeskill_cards.html">Design Guidelines</a></li>
+<li><a class="reference external" href="./makeskill_cli.html">Tech Docs</a></li>
+<li><a class="reference external" href="./about.html">About</a></li>
+</ul>
+<img alt="images/skill_dog.png" class="inner-container template-main-graphic" src="images/skill_dog.png" style="width: 120px; height: 100px;" />
+<p class="inner-container"><h1>Dog Finder</h1></p>
+<p class="inner-container tagline">A <em>multimodal</em> prototype about a wide variety of dog breed information for the Echo Spot</p>
+<p class="inner-container">Designed by Katherine Ong</p>
+</div>
+</div>
+<div class="templates-inner-container section" id="preview">
+<h1>Preview</h1>
+<a class="reference external image-reference" href="images/dog_finder_OUTPUT.mp4"><img alt="images/dog_finder_THUMB.png" src="images/dog_finder_THUMB.png" style="width: 800px;" /></a>
+</div>
+<div class="templates-inner-container section" id="how-to-build">
+<h1>How to Build</h1>
+<p>You can preview the intents, utterances, voice responses, and card assets in this spreadsheet:
+<a class="reference external" href="https://docs.google.com/spreadsheets/d/1W9EsfAOC9XOc57SOsgl0TGdwcINa7IwK4w4SpK_zFbo/edit#gid=0">https://docs.google.com/spreadsheets/d/1W9EsfAOC9XOc57SOsgl0TGdwcINa7IwK4w4SpK_zFbo/edit#gid=0</a></p>
+<img alt="images/spreadsheet_dog_a.png" src="images/spreadsheet_dog_a.png" style="width: 800px;" />
+<img alt="images/spreadsheet_dog_b.png" src="images/spreadsheet_dog_b.png" style="width: 800px;" />
+<p>There are four main parts for a Skill prototype like this: intent enumeration,
+utterance variation design, batch response design, and card design. Designing for voice occurs in the
+&quot;VUI&quot; tab of a Spreadsheet whereas the card assets will need to be uploaded to a public storage and referenced in the &quot;Cards&quot; tab.</p>
+<p>This design has 3 intents around dog matching. <code>DogBreedsIntent</code>,
+<code>BestBreedIntent</code>, <code>HowManyBreeds</code> have their respective utterance variations.  Each of these
+intents have 1 type of voice response and 1 type of card asset response.</p>
+<p>We tend to use <strong>Dropbox</strong> to host our cards. After you upload your card assets based on the <a class="reference external" href="./makeskill_cards.html">Makeskill Templates</a>
+then you can make a public shareable URL for each.  Then you'll need to reference that as a raw asset:
+<code>https://www.dropbox.com/s/li0qm8uu1zxjd06/list_1.png?raw=1</code></p>
+<p>Notice the <code>?raw=1</code> at the end of the public URL. This is a way of specifying that we want to grab a raw asset. This is
+crucial so that the Makeskill CLI can transform that URL into a background image as a response for a 1-turn interaction.</p>
+</div>
+</div>
+</div>
+
+<!-- Bootstrap core JavaScript ============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+<!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script>
+  var shiftWindow = function() { scrollBy(0, -140) };
+  window.addEventListener("hashchange", shiftWindow);
+  function load() { if (window.location.hash) shiftWindow(); }
+</script>
+
+
+<div class="bs-docs-footer-main footer">
+<p>Makeskill - 2018 Yahoo, Inc</p>
+<p>Code licensed under MIT, documentation under CC BY 4.0.</p>
+<ul class="bs-docs-footer-links muted simple">
+<li><a class="reference external" href="makeskill_cli.html">Documentation</a></li>
+<li>·</li>
+<li><a class="reference external" href="about.html">About</a></li>
+</ul>
+
+</div>
+</body>
+</html>

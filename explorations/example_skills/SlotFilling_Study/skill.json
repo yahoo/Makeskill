@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Sample Short Description",
+          "examplePhrases": [
+            "Alexa open hello world",
+            "Alexa tell hello world hello",
+            "Alexa ask hello world say hello"
+          ],
+          "name": "SlotFilling_Study",
+          "description": "Sample Full Description"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "./lambda/us-east-1_ask-custom-yahoo_Mail-default"
+        },
+        "interfaces": [
+          {
+            "type": "RENDER_TEMPLATE",
+            "minimumTemplateVersion": "1.0"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}

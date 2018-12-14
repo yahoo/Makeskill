@@ -1,0 +1,20 @@
+/* Example of how to elicit slots */
+
+const LaunchRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+  },
+  handle(handlerInput) {
+    const prompt = 'Welcome to Yahoo Travel, I help you book a flight?';
+    const reprompt ='Where do you want to fly to?'
+
+    return handlerInput.responseBuilder
+      .emit(':elicitSlot', 'DestinationName', prompt, reprompt);
+      // .speak(speechText)
+      // .reprompt('Where do you want to fly to?')
+      .getResponse();
+  },
+};
+
+// old SDK
+// this.emit(':elicitSlot', 'DestinationName', prompt, reprompt);

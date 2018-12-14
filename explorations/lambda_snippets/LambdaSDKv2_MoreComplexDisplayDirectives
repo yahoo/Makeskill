@@ -1,0 +1,113 @@
+/* Example of how helper functions can be used to make Display Directives  easier */
+
+
+function richTextMaker(pPrimaryText, pSecondaryText, pTertiaryText) {
+    const myTextContent = new Alexa.RichTextContentHelper();
+
+    if (pPrimaryText)
+        myTextContent.withPrimaryText(pPrimaryText);
+
+    if (pSecondaryText)
+        myTextContent.withSecondaryText(pSecondaryText);
+
+    if (pTertiaryText)
+        myTextContent.withTertiaryText(pTertiaryText);
+
+    return myTextContent.getTextContent();
+}
+
+function plainTextMaker(pPrimaryText, pSecondaryText, pTertiaryText) {
+    const myTextContent = new Alexa.PlainTextContentHelper()
+        .withPrimaryText(pPrimaryText)
+        .withSecondaryText(pSecondaryText)
+        .withTertiaryText(pTertiaryText)
+        .getTextContent();
+
+    return myTextContent;
+}
+
+
+function imageMaker(pDesc, pSource) {
+    const myImage = new Alexa.ImageHelper()
+        .withDescription(pDesc)
+        .addImageInstance(pSource)
+        .getImage();
+
+    return myImage;
+}
+
+function listTemplateMaker(pListTemplateType, pHandlerInput, pArray, pTitle, pOutputSpeech, pQuiz, pBackgroundIMG, pQuiz) {
+    const response = pHandlerInput.responseBuilder;
+    const backgroundImage = imageMaker("", pBackgroundIMG);
+    var itemList = [];
+    var title = pTitle;
+    var listItemNames = [];
+
+    if (pQuiz)
+    {
+        for (var i = 0; i < pArray.length; i++) {
+            listItemNames[i] = "";
+        }
+    }
+    else
+    {
+        for (var i = 0; i < pArray.length; i++) {
+            listItemNames[i] = pArray[i].name;
+        }
+    }
+
+
+
+    for (var i = 0; i < pArray.length; i++) {
+        itemList.push({
+            "token": pArray[i].token,
+            "textContent": new Alexa.PlainTextContentHelper().withPrimaryText(capitalizeFirstLetter(listItemNames[i])).getTextContent(),
+            "image": imageMaker("", pArray[i].imageURL)
+        });
+    }
+
+    if (pOutputSpeech) {
+        response.speak(pOutputSpeech);
+    }
+
+    response.addRenderTemplateDirective({
+        type: pListTemplateType,
+        backButton: 'hidden',
+        backgroundImage,
+        title,
+        listItems: itemList,
+    });
+
+    return response.getResponse();
+}
+
+function bodyTemplateMaker(pBodyTemplateType, pHandlerInput, pImg, pTitle, pText1, pText2, pText3, pOutputSpeech, pReprompt, pHint, pBackgroundIMG, pEndSession) {
+    const response = pHandlerInput.responseBuilder;
+    const image = imageMaker("", pImg);
+    const richText = richTextMaker(pText1, pText2, pText3);
+    const backgroundImage = imageMaker("", pBackgroundIMG);
+    const title = pTitle;
+
+    response.addRenderTemplateDirective({
+        type: pBodyTemplateType,
+        backButton: 'visible',
+        image,
+        backgroundImage,
+        title,
+        textContent: richText,
+    });
+
+    if (pHint)
+        response.addHintDirective(pHint);
+
+    if (pOutputSpeech)
+        response.speak(pOutputSpeech);
+
+    if (pReprompt)
+        response.reprompt(pReprompt)
+
+    if (pEndSession)
+        response.withShouldEndSession(pEndSession);
+
+    return response.getResponse();
+}

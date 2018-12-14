@@ -1,0 +1,57 @@
+/* Example of how slot filling works in handlers */
+
+const LaunchRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+  },
+  handle(handlerInput) {
+    const speechText = 'Welcome to Muse Match, I can help you find a local music event. What kind of music event are you looking for?';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt('What music events are you interested in? Raves, concerts, or festivals?')
+      // .withSimpleCard('Hello World', speechText)
+      .getResponse();
+  },
+};
+
+// started or in_progress
+const InprogressFindMusicEventHandler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'FindMusicEventIntent'
+      && request.dialogState !== 'COMPLETED'; // started or in_progress
+  },
+  handle(handlerInput) {
+    const currentIntent = handlerInput.requestEnvelope.request.intent;
+     // const currentSlot = currentIntent.slots[slotName];
+     let prompt = 'Answer the question';
+            // console.log('test');
+            return handlerInput.responseBuilder
+              .addDelegateDirective(currentIntent)
+              // .addElicitSlotDirective(currentSlot.name)
+              // .getResponse();ective(currentSlot.name)
+              .getResponse()
+            },
+};
+
+// One dialog state is set to complete
+const CompletedFindMusicEventHandler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'FindMusicEventIntent';
+    //  && request.dialogState === 'COMPLETED';
+  },
+  async handle(handlerInput) {
+    const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
+    const speechOutput = `The music was within you this whole, just kidding hard coding a single response is easier`;
+
+    return handlerInput.responseBuilder
+      .speak(speechOutput)
+      .getResponse();
+  },
+};

@@ -1,0 +1,92 @@
+/* Example of how minute control over slot filling */
+
+
+// once dialogState is set to COMPLETED,
+// grab the required slots and unpack them with getSlotValues
+// which returns a simplified object of slots that include the spoken value,
+// resolved synonym and a Boolean that indicates whether or not the slot has been confirmed via dialog management.
+
+function getSlotValues (filledSlots) {
+    let slotValues = {};
+
+    console.log('The filled slots: ' + JSON.stringify(filledSlots));
+    Object.keys(filledSlots).forEach(function(item) {
+
+    var name = filledSlots[item].name;
+
+    if(filledSlots[item]&&
+        filledSlots[item].resolutions &&
+        filledSlots[item].resolutions.resolutionsPerAuthority[0] &&
+        filledSlots[item].resolutions.resolutionsPerAuthority[0].status &&
+        filledSlots[item].resolutions.resolutionsPerAuthority[0].status.code ) {
+
+        switch (filledSlots[item].resolutions.resolutionsPerAuthority[0].status.code) {
+            case "ER_SUCCESS_MATCH":
+                slotValues[name] = {
+                    "synonym": filledSlots[item].value,
+                    "resolved": filledSlots[item].resolutions.resolutionsPerAuthority[0].values[0].value.name,
+                    "isValidated": true
+                };
+                break;
+            case "ER_SUCCESS_NO_MATCH":
+                slotValues[name] = {
+                    "synonym": filledSlots[item].value,
+                    "resolved": filledSlots[item].value,
+                    "isValidated":false
+                };
+                break;
+            }
+        } else {
+            slotValues[name] = {
+                "synonym": filledSlots[item].value,
+                "resolved": filledSlots[item].value,
+                "isValidated": false
+            };
+        }
+    },this);
+    return slotValues;
+}
+
+function delegateSlotCollection(func) {
+    console.log("in delegateSlotCollection");
+    console.log("current dialogState: " + this.event.request.dialogState);
+
+    if(func) {
+        if (func(this.event)) {
+            this.event.request.dialogState = "COMPLETED";
+            return this.event.request.intent.slots;
+        }
+    }
+
+    if (this.event.request.dialogState === "STARTED") {
+        console.log("in STARTED");
+        console.log(JSON.stringify(this.event));
+        var updatedIntent = this.event.request.intent;
+        // optionally pre-fill slots: update the intent object with slot values
+        // for which you have defaults, then return Dialog.Delegate with this
+        // updated intent in the updatedIntent property
+
+        this.emit(":delegate", updatedIntent);
+    } else if (this.event.request.dialogState !== "COMPLETED") {
+        console.log("in not completed");
+        //console.log(JSON.stringify(this.event));
+        this.emit(":delegate", updatedIntent);
+    } else {
+        console.log("in completed");
+        // Dialog is now complete and all required slots should be filled,
+        // so call your regular intent handler.
+        return this.event.request.intent.slots;
+    }
+    return null;
+}
+
+// Anonymous Function to check zip || city && state
+function(event) {
+    let result = false;
+    let slots = event.request.intent.slots;
+
+    if(slots.zip.value || slots.city.value && slots.state.value) { // checks condition set
+        result = true;
+    }
+    return result;
+});

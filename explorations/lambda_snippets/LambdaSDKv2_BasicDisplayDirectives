@@ -1,0 +1,65 @@
+
+/* Example of how Display Directives are used in new SDK, similar to old I assume */
+
+const LaunchRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+  },
+  handle(handlerInput) {
+    // const speechOutput = "<audio src='https://s3.amazonaws.com/ask-soundlibrary/home/amzn_sfx_doorbell_chime_02.mp3'/> You are the fairest one";
+if (supportsDisplay(handlerInput) ) {
+
+     const myImage = new Alexa.ImageHelper()
+       .addImageInstance('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAL9tbpFVHQ2n_-M4UGcsmoAMcvjTkD9AxZvVHe9XLwW214SJ_')
+       .getImage();
+
+     // const mainImage = new Alexa.ImageHelper()
+     //   .addImageInstance('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAL9tbpFVHQ2n_-https://www.dropbox.com/s/i8x0imjdr31c2z5/MainImage_340x340.png?dl=0')
+     //   .getImage();
+
+     const primaryText = new Alexa.RichTextContentHelper()
+       .withPrimaryText(speechOutput)
+       .getTextContent();
+
+     return handlerInput.responseBuilder.addRenderTemplateDirective({
+       type: 'BodyTemplate1',
+       token: 'string',
+       backButton: 'HIDDEN',
+       // Image: mainImage,
+       backgroundImage: myImage,
+       title: "Magic Mirror test",
+       textContent: primaryText,
+     });
+
+}
+   const myBGImage = new Alexa.ImageHelper()
+      //.addImageInstance('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAL9tbpFVHQ2n_-M4UGcsmoAMcvjTkD9AxZvVHe9XLwW214SJ_')
+      .addImageInstance('http://technology.inquirer.net/files/2017/10/the-most-famous-windows-wallpaper-ever-turns-20-505668-2.jpg')
+      .getImage();
+
+   const mainImage = new Alexa.ImageHelper()
+      .addImageInstance('https://dl.dropboxusercontent.com/s/1c31073mh6uyjt8/MainImage_340x380.png?dl=0')
+      .getImage();
+
+   // var inline = "TEST <img src='https://78.media.tumblr.com/dd522f6ea75ea147fe600c8be6d129f2/tumblr_pd0snc5B1l1r3tjgwo1_250.png' width='100' height='50' alt='Yahoo! Mail' />";
+
+   const primaryText = new Alexa.RichTextContentHelper()
+      .withPrimaryText('<font size="7"> You are the fairest one of them all. 	<action token="2347"> history </action> <br/> Cause baby its you. 	<br/> 	<br/>Youre the one I love. Youre the one that I need. </font>')
+      .getTextContent();
+
+   return handlerInput.responseBuilder
+     .speak('Magic Mirror Yall')
+     .addRenderTemplateDirective({
+       type: 'BodyTemplate2',
+       token: 'string',
+       backButton: 'HIDDEN',
+       image: mainImage,
+       backgroundImage: myBGImage,
+       title: '<font size="5"> Just Do It </font>',
+       // title: richInline,
+       textContent: primaryText,
+     })
+     //.withSimpleCard(speechOutput) // Allows for siple card to be rendered on Alexa app
+     .getResponse();
+ },
+};

@@ -1,0 +1,441 @@
+@font-face {
+    font-family: YahooSans;
+    src: url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Regular.woff2') format('woff2'),
+         url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Regular.woff') format('woff'),
+         url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: YahooSans;
+    src: url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Semibold.woff2') format('woff2'),
+         url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Semibold.woff') format('woff'),
+         url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Semibold.ttf') format('ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: YahooSans;
+    src: url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Bold.woff2') format('woff2'),
+         url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Bold.woff') format('woff'),
+         url('https://www.yahoo.com/sy/os/fontserver/YahooSans/Bold.ttf') format('ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.alpha {
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  position: relative;
+  top: 20px;
+  font-size: 85%;
+}
+
+a {
+  color: #0034BE;
+}
+
+body {
+  font-family: YahooSans, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+/*  color: #787D82; */
+  color: #27282A;
+}
+
+h1, h2, h3, dt {
+  color: #27282A;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+h3 {
+  line-height: 1.35;
+  font-size: 140%;
+}
+
+ul {
+  list-style: none;
+}
+
+.templates-inner-container li {
+  font-size: 120%;
+}
+
+.bigger-text {
+  font-size: 145%;
+  color: #777;
+}
+
+.bs-docs-masthead, .bs-docs-header {
+  background-image: linear-gradient(45deg, #3d9dff 2%, #6140FF 100%);
+}
+
+.bs-docs-header {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 70px;
+  padding: 15px 0 0 0;
+}
+
+.bs-docs-header h1 {
+  color: #FFF;
+  font-size: 120%;
+}
+
+.main-graphic {
+  top: -33px;
+  left: -40px;
+  position: relative;
+}
+
+.template-main-graphic {
+  position: relative;
+}
+
+
+.main-cta {
+  margin-top: 30px;
+  padding-left: 0 !important;
+}
+
+.doc-img {
+  max-width: 850px;
+  margin-bottom: 20px;
+}
+
+.bs-docs-footer {
+  position: relative;
+  top: 150px;
+  margin-top: 70px;
+}
+
+.section > h1 {
+  color: #27282A;
+  border-bottom: 0;
+  margin: 40px 0 10px;
+  font-weight: bold;
+  font-size: 210%;
+}
+
+.btn-primary {
+  background-color: #0034BE;
+  border-color: #0034BE;
+
+  /*
+  background-color: #0069d9;
+  border-color: #0069d9;
+  border-bottom: 3px solid #0034BE;
+  */
+  font-size: 130%;
+  padding: 8px 28px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+/*
+.btn-primary:hover {
+  background-color: #0034BE;
+  border-color: #00128A;
+}
+*/
+
+.main-header {
+  height: 550px;
+  background-image: linear-gradient(45deg, #24B4FF 2%, #6140FF 100%);
+  position: relative;
+  top: -16px;
+  color: #FFF;
+  padding-top: 120px;
+  width: 100%
+}
+
+.example-header {
+  font-size: 140%;
+  margin-bottom: 0px;
+}
+
+.try-it-header {
+  height: 200px;
+  position: relative;
+  top: 20px;
+  color: #4D4D4D;
+  padding-top: 120px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+.templates-header {
+  height: 550px;
+/*  background-image: linear-gradient(45deg, #24B4FF 2%, #6140FF 100%); */
+  position: relative;
+  top: 20px;
+  color: #4D4D4D;
+  padding-top: 120px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.container {
+  max-width: 100% !important;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+.inner-container, .templates-inner-container, .section {
+  max-width: 1140px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.templates-inner-container {
+  max-width: 960px !important;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.templates-inner-container p {
+  font-size: 120%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.doc-test {
+  position: relative;
+  top: 58px;
+  margin: 0;
+  max-width: 900px;
+  width: 100%;
+}
+
+.doc-test div {
+    padding-left: 0;
+}
+
+.main-header h1 {
+  font-size: 350% !important;
+  font-weight: bold;
+  color: #FFF;
+}
+
+.templates-header h1, .try-it-header h1 {
+  font-size: 350% !important;
+  font-weight: bold;
+}
+
+.tagline {
+  font-size: 160% !important;
+}
+
+
+.my-container {
+  background-color: #FFF;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  border: 1px solid #DDD;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.my-container.ex-a {
+  background-size: cover;
+  background-image: url("../../images/example_1.png");
+}
+
+.my-container.ex-b {
+  background-size: cover;
+  background-image: url("../../images/example_2.png");
+}
+
+.my-container.ex-c {
+  background-size: cover;
+  background-image: url("../../images/example_3.png");
+}
+
+.my-container.ex-d {
+  background-size: cover;
+  background-image: url("../../images/example_4.png");
+}
+
+
+.my-container.lauren {
+  background-image: url("../../images/mug_lauren.JPG");
+}
+
+.my-container.anna {
+  background-image: url("../../images/mug_anna.JPG");
+}
+.my-container.judy {
+  background-image: url("../../images/mug_judy.JPG");
+}
+
+.my-container.duke {
+  background-image: url("../../images/mug_duke.JPG");
+}
+.my-container.katherine {
+  background-image: url("../../images/mug_katherine.JPG");
+}
+
+.my-container.blank {
+  border: none;
+}
+
+
+.my-container-big {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-position: center center;
+  background-color: #CCC;
+  border-radius: 6px;
+}
+
+
+.my-container-big.workshop {
+  background-image: url('../../images/makeskill_workshop.png');
+}
+
+.my-container-big.pic-a {
+  background-image: url('../../images/makeskill_sheets.png');
+}
+
+.my-container-big.pic-b {
+  background-image: url('../../images/makeskill_preview.png');
+}
+
+.my-container-big.pic-c {
+  background-position: -21px;
+  background-image: url('../../images/makeskill_batches.png');
+  border: 1px solid #EEE;
+}
+
+.my-container-big.pic-d {
+  background-image: url('../../images/makeskill_code.png');
+  background-position: 0;
+  opacity: 0.9;
+}
+
+
+
+.sidebar {
+  position: fixed;
+  top: 100px;
+  margin-left: 0px;
+}
+
+.test {
+  position: relative;
+  top: 58px;
+  padding: 0 15px;
+}
+
+
+.mini-footer {
+  position: relative;
+  top: 100px;
+  color: #B8BDC5;
+  font-size: 95%;
+  margin-bottom: 20px;
+}
+
+.test.last {
+  margin-bottom: 70px;
+}
+
+.nav-list {
+  list-style: none;
+  position: fixed;
+  top: 22px;
+  right: 20px;
+  font-size: 16px;
+}
+
+.nav-list li:last-child a, .nav-list li:last-child a:hover {
+  border: 1px solid #FFF;
+  border-radius: 4px;
+  background: #FFF;
+  color: #0034BE !important;
+  padding: 6px 18px;
+}
+
+.nav-list li {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.nav-list li a, .nav-list li a:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.last-updated {
+  position: absolute;
+  top: 505px;
+  right: 36px;
+  color: rgba(255,255,255,0.4);
+}
+
+/*
+.test:target {
+  display: block;
+ height: 100px;
+ margin-top: -100px;
+ visibility: hidden;
+}
+*/
+
+.logo a {
+  display: inline-block;
+  position: fixed;
+  left: 40px;
+  top: 13px;
+  height: 45px;
+  width: 90px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-size: 1%;
+  color: rgba(0,0,0,0);
+  background-image: url('../../images/ms_logo.png');
+}
+
+.header-title {
+  left: 120px;
+  position: absolute;
+  top: 4px;
+  color: #FFF;
+  font-size: 100%;
+}
+
+.bs-docs-footer-main {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  text-align: center;
+  background-color: #27282A;
+  color: #FFF;
+}
+
+.bs-docs-footer-main a {
+  color: #FFF;
+}
+
+
+.hidden {
+  display: none;
+}

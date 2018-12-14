@@ -1,0 +1,138 @@
+#!/usr/bin/env node
+// Copyright 2018, Oath Inc.
+// Licensed under the terms of the MIT license. See LICENSE file in project root for terms.
+
+// run "chmod u+x mdk_starter.js" on command line to set permissions for mdk_starter
+// all dependencies have been added to packages for general makeskill running npm install/link should do it
+
+'use strict';
+
+const inquirer = require("inquirer");
+const fs = require('fs');
+
+const configFile = require('./config/config.json');
+const configFileName = 'config.json';
+
+const secretFile = require('./config/client_secret.json');
+const secretFileName = 'client_secret.json';
+
+inquirer.prompt([
+    {
+        type: "input",
+        name: "invocation_name",
+        message: "\n\nWelcome to Makeskill Design Kit! \n Use this to generate a configuration file for Makeskill CLI. \n \nPlease type in your Alexa Skill\'s invocation name:",
+
+        validate: function(name) {
+          if (name.length <= 0) {
+            return 'Enter an invocation name.';
+          }
+
+          return true;
+        }
+    },
+    {
+        type: "input",
+        name: "sheet_URL",
+        message: "Enter in your Google Sheet\'s URL:",
+
+        validate: function(name) {
+          if (name.length < 45) {
+            return 'Copy and paste in the Google Spreadsheet URL you want to parse from.';
+          }
+
+          return true;
+        }
+    },
+    {
+        type: "input",
+        name: "vui_sheet",
+        message: "Enter in your VUI sheet name:",
+        default: "VUI"
+    },
+    {
+        type: "confirm",
+        name: "multimodal_cards_check",
+        message: "Do you have a Cards sheet?",
+        default: false
+    },
+    {
+        when: function (response){
+          return response.multimodal_cards_check;
+        },
+        type: "input",
+        name: 'multimodal_cards',
+        message: 'Enter in your Cards sheet name:',
+        default: "Cards"
+    },
+    {
+        type: "confirm",
+        name: "custom_entities_check",
+        message: "Do you have a Custom Entities Cards sheet?",
+        default: false
+    },
+    {
+        when: function (response){
+          return response.custom_entities_check;
+        },
+        type: "input",
+        name: "custom_entities",
+        message: "Enter in your Custom Entities sheet name:",
+        default: "Custom_Entities"
+    },
+    {
+        type: "confirm",
+        name: "slot_prompts_check",
+        message: "Do you have a Custom Slot Prompts sheet?",
+        default: false
+    },
+    {
+        when: function (response){
+          return response.slot_prompts_check;
+        },
+        type: "input",
+        name: "slot_prompts",
+        message: "Enter in your Slot Prompts sheet name:",
+        default: "Prompts"
+    },
+    {
+        type: "input",
+        name: "batch_letter",
+        message: "Enter in your batch letter:",
+        default: "A"
+    },
+]).then((answers) => {
+    // parses through input for sheet_URL grabbing string between "d\/" and "\/edit"
+
+    // MORE ERROR HANDLING
+    let almostSheetId = answers.sheet_URL.match("d/(.*)/edit");
+    let sheetID = almostSheetId[1];
+
+    // converts invocation string to lower case
+    let lcInvocationName = answers.invocation_name.toLowerCase().trim();
+
+    // for easier calls
+    let vuiSheetName = answers.vui_sheet;
+    let multiModalSheetName = answers.multimodal_cards;
+    let customEntitiesSheetName = answers.custom_entities;
+    let slotPromptsSheetName = answers.slot_prompts;
+    let batchLetter = answers.batch_letter;
+
+
+    let rawConfigData = fs.readFileSync('./config/config.json');
+    let configsData = JSON.parse(rawConfigData);
+
+    configFile.invocationName = lcInvocationName;
+    configFile.sheetId = sheetID;
+    configFile.vuiSheet = vuiSheetName;
+    configFile.multimodalCards = multiModalSheetName;
+    configFile.customEntities = customEntitiesSheetName;
+    configFile.slotPrompts = slotPromptsSheetName;
+    configFile.defaultBatchLetter = batchLetter;
+
+
+    fs.writeFile(configFileName, JSON.stringify(configFile, null, 2), (error) => { /* handle error */
+      if (error) throw (error);
+      console.log('Great! You are all configured!')
+    });
+
+});

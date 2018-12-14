@@ -1,0 +1,198 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "muse match",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "FindMusicEventIntent",
+          "slots": [
+            {
+              "name": "Event_Types",
+              "type": "eventTypes",
+              "samples": [
+                "I like {Event_Types}",
+                "{Event_Types}"
+              ]
+            },
+            {
+              "name": "US_Cities",
+              "type": "AMAZON.US_CITY",
+              "samples": [
+                "I am closest to {US_Cities}",
+                "{US_Cities}"
+              ]
+            },
+            {
+              "name": "Genres",
+              "type": "AMAZON.Genre"
+            }
+          ],
+          "samples": [
+            "{Event_Types}",
+            "I like {Event_Types}",
+            "I prefer {Event_Types}"
+          ]
+        },
+        {
+          "name": "AMAZON.MoreIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateSettingsIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollRightIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollLeftIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollUpIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "Rave"
+              }
+            },
+            {
+              "name": {
+                "value": "Raves"
+              }
+            },
+            {
+              "name": {
+                "value": "Concert"
+              }
+            },
+            {
+              "name": {
+                "value": "Concerts"
+              }
+            },
+            {
+              "name": {
+                "value": "Festival"
+              }
+            },
+            {
+              "name": {
+                "value": "Festivals"
+              }
+            }
+          ],
+          "name": "eventTypes"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "FindMusicEventIntent",
+          "confirmationRequired": false,
+          "slots": [
+            {
+              "name": "Event_Types",
+              "type": "eventTypes",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FindMusicEventIntent.IntentSlot-Event_Types"
+              }
+            },
+            {
+              "name": "Genres",
+              "type": "AMAZON.Genre",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FindMusicEventIntent.IntentSlot-Genres"
+              }
+            },
+            {
+              "name": "US_Cities",
+              "type": "AMAZON.US_CITY",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FindMusicEventIntent.IntentSlot-US_Cities"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Intent-FindMusicEventIntent.IntentSlot-Event_Types",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What kind of events are you into? You can choose from rave, concert, or festival."
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Intent-FindMusicEventIntent.IntentSlot-Genres",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What genres of music do you like? Examples would be like jazz, hard rock, or techno."
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Intent-FindMusicEventIntent.IntentSlot-US_Cities",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What US city are you closest to?"
+          }
+        ]
+      }
+    ]
+  }
+}

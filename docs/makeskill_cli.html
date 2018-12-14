@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Makeskill Design Kit</title>
+<meta charset="utf-8">
+<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
+<title>makeskill_cli.rst</title>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap core CSS =================================================== -->
+<link href="./bootstrap/css/docs-min.css" rel="stylesheet">
+<link href="./bootstrap/css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="bootstrap/css/test.css" type="text/css" />
+</head>
+<body>
+<div class="bs-docs-header header">
+<div class="container">
+<p class="logo"><a class="reference external" href="./index.html">M</a></p>
+<ul class="nav-list simple">
+<li><a class="reference external" href="./index.html#id4">Gallery</a></li>
+<li><a class="reference external" href="./makeskill_cards.html">Design Resources</a></li>
+<li><a class="reference external" href="./makeskill_cli.html">Tech Docs</a></li>
+<li><a class="reference external" href="./about.html">About</a></li>
+<li><a class="reference external" href="./try_it.html">Try It</a></li>
+</ul>
+</div>
+
+</div>
+<div class="container">
+
+
+<div class="row">
+<div class="col-md-3 col-md-push-9">
+<div class="bs-docs-sidebar hidden-print affix-top">
+<div class="sidebar">
+<p class="first sidebar-title">sidebar</p>
+<div class="contents last topic" id="content">
+<p class="topic-title first">content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#makeskill-cli-overview" id="id4">Makeskill CLI Overview</a><ul>
+<li><a class="reference internal" href="#developer-audience" id="id5">Developer Audience</a></li>
+<li><a class="reference internal" href="#technical-requirements" id="id6">Technical Requirements</a></li>
+<li><a class="reference internal" href="#workflow-at-a-glance" id="id7">Workflow at a Glance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration" id="id8">Configuration</a><ul>
+<li><a class="reference internal" href="#directory-structure" id="id9">Directory Structure</a></li>
+<li><a class="reference internal" href="#spreadsheet-scaffold" id="id10">Spreadsheet Scaffold</a></li>
+<li><a class="reference internal" href="#config-file" id="id11">Config File</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#objects" id="id12">Objects</a><ul>
+<li><a class="reference internal" href="#batch" id="id13">Batch</a></li>
+<li><a class="reference internal" href="#cards" id="id14">Cards</a></li>
+<li><a class="reference internal" href="#slots" id="id15">Slots</a></li>
+<li><a class="reference internal" href="#id1" id="id16">Custom Entities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to" id="id17">How To</a><ul>
+<li><a class="reference internal" href="#create-a-batch" id="id18">Create a Batch</a></li>
+<li><a class="reference internal" href="#create-multiple-batches" id="id19">Create Multiple Batches</a></li>
+<li><a class="reference internal" href="#embed-ssml-speechcons" id="id20">Embed SSML Speechcons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#evolutionary-prototyping" id="id21">Evolutionary Prototyping</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-9 col-md-pull-3">
+<div class="doc-test section" id="makeskill-cli-overview">
+<h1>Makeskill CLI Overview</h1>
+<p>Makeskill is a Node.js-based tool that parses a Google Spreadsheet to output
+batches of Alexa Skill rapid prototypes. Collaborate with your stakeholders through
+a familiar tool like Google Spreadsheets to make quick Alexa Skills in bulk for
+testing your concepts. It works best with Amazon's ASK CLI to have a continuous
+flow between Makeskill automation and deploying through ASK.</p>
+<dl class="docutils">
+<dt>Current Features:</dt>
+<dd><ul class="first last simple">
+<li>Auto-generate interaction model and AWS Lambda function (en-US locale) - compatible with ASK CLI</li>
+<li>Can write A-Z Skill batches (Lambda function variations), export 1 at a time</li>
+<li>Accounts only for 1 turn utterance/response interactions</li>
+<li>Early custom slot support</li>
+<li>Early multimodal prototyping support (Echo Show and Echo Spot)</li>
+<li>Can handle Speechcons in SSML in the Batch columns</li>
+</ul>
+</dd>
+<dt>After downloading the repository:</dt>
+<dd><pre class="code highlight first last literal-block">
+// Within your Skill project folder
+cd makeskill
+npm link
+npm install
+</pre>
+</dd>
+</dl>
+<div class="section" id="developer-audience">
+<h2>Developer Audience</h2>
+<p>If you are a Node.js developer interested in working with the Alexa
+Skills Kit, then this tool is for you!  You can use
+this to streamline team communication and experiment design for research
+purposes, while scaffolding an early version of your Alexa Skill.  It also provides a
+quick way for you to familiarize with Alexa technology without being an expert.</p>
+</div>
+<div class="section" id="technical-requirements">
+<h2>Technical Requirements</h2>
+<ul class="simple">
+<li>Latest Node.js (or v6.11.4)</li>
+<li>Latest npm (or 3.10.10)</li>
+<li><a class="reference external" href="https://developer.amazon.com/">Amazon Developer Account</a> / <a class="reference external" href="https://aws.amazon.com/">AWS Account</a></li>
+<li>Alexa Skills Kit CLI</li>
+<li>Google Spreadsheets / <a class="reference external" href="https://developers.google.com/sheets/api/quickstart/nodejs">API Key Docs</a></li>
+</ul>
+<p>NOTE: We are working on upgrading to the latest Alexa Skills Kit CLI version; for the preview we are generating
+code for v1.1.0.</p>
+</div>
+<div class="section" id="workflow-at-a-glance">
+<h2>Workflow at a Glance</h2>
+<p>Plan dialogs and early card design concepts through Spreadsheets. All of the Skill
+coding is abstracted away (though a developer can easily pick up the autogenerated
+lambda and interaction model code later). Therefore, you and your team can truly
+focus on tinkering with the copywriting and experience design as soon as possible!</p>
+<p>See <a class="reference external" href="./images/makeskill_demo.mp4">Demo Video</a>.</p>
+</div>
+</div>
+<div class="doc-test section" id="configuration">
+<h1>Configuration</h1>
+<p>There are a couple of technologies stitched together to make up the Makeskill CLI. The tool
+will need to have permissions configured to talk to AWS so that the deployment process is seemless through
+the command line. In addition, Makeskill requires a Google Sheets credential in order to grab data from the Spreadsheets.</p>
+<p>Makeskill CLI accounts for voice-first, multimodal design.  Therefore, there are different
+parameters that can be configured for varying Skill complexities that we'll detail in this section.</p>
+<div class="section" id="directory-structure">
+<h2>Directory Structure</h2>
+<p>Simply create a new default template via
+ASK CLI and then install Makeskill within the directory. Makeskill will override
+the default interaction model and lambda functions provided.</p>
+<p>Your file tree should look something like this after proper installation within ASK CLI framework:</p>
+<pre class="code highlight literal-block">
+// In your Skill project folder's highest level
+Makeskill
+lambda
+  - custom
+    - index.js
+    - node_modules
+    - package.json
+models
+  - en-US.json
+skill.json
+</pre>
+<p>If not using ASK CLI, you'll just need to change the config file to specify a
+destination for your autogenerated files. You can manually copy and paste these
+files into the ASK and AWS tools.</p>
+</div>
+<div class="section" id="spreadsheet-scaffold">
+<h2>Spreadsheet Scaffold</h2>
+<p>You can use this as your <a class="reference external" href="https://docs.google.com/spreadsheets/d/1Jdws3fZa5U_eXCcMLy7aKZdv5KNQusNcferTojJDzAI/edit?usp=sharing">sample Makeskill Spreadsheet</a>.</p>
+<img alt="images/vui_1_skill.png" class="doc-img" src="images/vui_1_skill.png" />
+</div>
+<div class="section" id="config-file">
+<h2>Config File</h2>
+<p>You can use the mdk_starter script to generate a config file that is tied to the
+Google Sheet you want to parse from:</p>
+<blockquote>
+<pre class="code highlight literal-block">
+npm install
+chmod u+x mdk_starter.js
+./mdk_starter
+</pre>
+</blockquote>
+<dl class="docutils">
+<dt>Within Makeskill's config.json, you'll see the following:</dt>
+<dd><pre class="code highlight first last literal-block">
+{
+  &quot;invocationName&quot;: &quot;[NAME_OF_SKILL]&quot;,
+  &quot;sheetId&quot;: &quot;[SHEET_ID]&quot;,
+  &quot;vuiSheet&quot;: &quot;[VUI_SHEET_NAME]&quot;,
+  &quot;multimodalCards&quot;: &quot;[CARD_SHEET_NAME]&quot;,
+  &quot;customEntities&quot;: &quot;[CUSTOM_ENTITIES_SHEET_NAME]&quot;,
+  &quot;defaultBatchLetter&quot;: &quot;A&quot;,
+  &quot;lambdaFolder&quot;: &quot;../lambda/custom&quot;,
+  &quot;modelsFolder&quot;: &quot;../models&quot;
+
+  &quot;googleSecret&quot;: &quot;./client_secret.json&quot;,
+}
+</pre>
+</dd>
+</dl>
+<p>In practice, you'll likely be setting this config file once. The default batch
+you'll be exporting according to this config is <code>&quot;A&quot;</code>.</p>
+<div class="section" id="invocation-name">
+<h3>Invocation Name</h3>
+<p>This is a lowercase name that is easy for Alexa to pick up as a user
+pronounces it.  See recommendations from the <a class="reference external" href="https://developer.amazon.com/blogs/post/Tx1I0GCST7POI00/tips-for-choosing-an-invocation-name-for-your-alexa-custom-skill">Alexa invocation name guidelines</a>.</p>
+</div>
+<div class="section" id="sheet-id">
+<h3>Sheet ID</h3>
+<p>You'll be adding the ID sandwiched between &quot;d/&quot; and &quot;/edit#gid=0&quot; in your Google Spreadsheet URL to reference in the <code>sheetId</code> attribute in our Makeskill config.json file:</p>
+<img alt="images/sheet_id.png" class="doc-img" src="images/sheet_id.png" />
+</div>
+<div class="section" id="vui-sheet">
+<h3>VUI Sheet</h3>
+<p>This is the name of the sheet you'll be parsing from that's designated only to VUI batches.</p>
+<img alt="images/sheet_tabs.png" class="doc-img" src="images/sheet_tabs.png" style="width: 310px;" />
+</div>
+<div class="section" id="multimodal-cards">
+<h3>Multimodal Cards</h3>
+<p>This is the sheet responsible for card asset URLs for either Echo Show or Echo Spot. Pair the card batch columns accordingly with VUI sheet columns.  Card assets are mapped to the VUI responses via intents.  If you want to turn off multimodality, use <code>&quot;&quot;</code> as the assignment.</p>
+</div>
+<div class="section" id="custom-entities">
+<h3>Custom Entities</h3>
+<p>If you're making your own slots, be sure to define the custom entities in a separate sheet and link it in the config. Makeskill will automatically render the new interaction model with your canned values.</p>
+</div>
+<div class="section" id="default-batch-letter">
+<h3>Default Batch Letter</h3>
+<p>By default, the config file has batch A exporting for you, which is indicated by <code>&quot;A&quot;</code>.  Batches B, C, etc would be
+denoted by <code>&quot;B&quot;</code>, <code>&quot;C&quot;</code>, etc up to Z, respectively.</p>
+</div>
+<div class="section" id="lambda-and-models-folders">
+<h3>Lambda and Models Folders</h3>
+<p>In the folders of your choosing, select where the Lambda function and Interaction Model files will be generated.  If
+using an ASK CLI template, the file paths should be <code>../lambda/custom</code> and <code>../models</code> respectively.</p>
+</div>
+<div class="section" id="google-secret">
+<h3>Google Secret</h3>
+<p>The <code>googleSecret</code> attribute references a client_secret.json in order to permit Makeskill to talk to your Google Spreadsheets.</p>
+<ol class="arabic">
+<li><p class="first">Click <a class="reference external" href="https://console.developers.google.com/start/api?id=sheets.googleapis.com">this wizard</a> link in step A in the <a class="reference external" href="https://developers.google.com/sheets/api/quickstart/nodejs">Node.js Quickstart</a>.</p>
+</li>
+<li><p class="first">Create a project and Continue.</p>
+</li>
+<li><p class="first">The API should be enabled. Go to credentials.</p>
+</li>
+<li><p class="first">To add credentials to your project, select &quot;Other UI (e.g. Windows, CLI tool)&quot; to set where the API will be called from.</p>
+</li>
+<li><p class="first">Select “User data” then “What credentials do I need?”</p>
+</li>
+<li><p class="first">Use “Makeskill” as the client ID. Create client ID.</p>
+</li>
+<li><p class="first">Now you can download credentials for your project.</p>
+<dl class="docutils">
+<dt>Populate your client_secret.json file with something like:</dt>
+<dd><pre class="code highlight first last literal-block">
+{
+   &quot;installed&quot;:{
+      &quot;client_id&quot;:&quot;[UNIQUE_ID].apps.googleusercontent.com&quot;,
+      &quot;project_id&quot;:&quot;[PROJECT_ID]&quot;,
+      &quot;auth_uri&quot;:&quot;https://accounts.google.com/o/oauth2/auth&quot;,
+      &quot;token_uri&quot;:&quot;https://accounts.google.com/o/oauth2/token&quot;,
+      &quot;auth_provider_x509_cert_url&quot;:&quot;https://www.googleapis.com/oauth2/v1/certs&quot;,
+      &quot;client_secret&quot;:&quot;[SECRET]&quot;,
+      &quot;redirect_uris&quot;:[
+         &quot;urn:ietf:wg:oauth:2.0:oob&quot;,
+         &quot;http://localhost&quot;
+      ]
+   }
+}
+</pre>
+</dd>
+</dl>
+</li>
+<li><p class="first">Run <code>makeskill --config [config location]</code> with the Spreadsheet scaffold.</p>
+</li>
+<li><p class="first">In your terminal after running makeskill, you’ll get a prompt to visit a URL to authorize access. Copy and paste that URL into your browser to obtain a code.</p>
+</li>
+<li><p class="first">Allow for access through the browser.</p>
+</li>
+<li><p class="first">Copy and paste the code into your terminal where you ran makeskill.</p>
+</li>
+<li><p class="first">Now, you should be set to make your own skill batches!</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="doc-test section" id="objects">
+<h1>Objects</h1>
+<p>The following are fundamental constructs of the Makeskill method of voice prototyping.  There are some tight correlations
+to Amazon Alexa's voice interface.</p>
+<div class="section" id="batch">
+<h2>Batch</h2>
+<p>A Batch is essentially a Lambda Function response variation. Basically, if you want to be able to test different responses
+out and export different Alexa prototypes, using a Batch is the easiest way to do that.</p>
+</div>
+<div class="section" id="cards">
+<h2>Cards</h2>
+<p>We want to equip designers with a quick way to preview their Echo Show and Echo Spot cards without having to commit to all the nuances behind body templates in code. Makeskill will parse the Google Spreadsheet for links to public PNGs of whole card mocks.</p>
+<p>You can download some templates <a class="reference external" href="./makeskill_cards.html">here</a>. The Sketch file shows a rough approximation to what your cards will look like.</p>
+</div>
+<div class="section" id="slots">
+<h2>Slots</h2>
+<p>Slots are useful for making your interaction model smarter. Makeskill Slots have very similar syntax to how you would manually write slots in your interaction model.</p>
+<p>Simply depict a new slot name within the <code>{}</code> notation. For custom entities, you can make another sheet tab within called &quot;Custom_Entities&quot; and you can cross-reference those entity definitions from your utterance variations.</p>
+<img alt="images/slots.png" class="doc-img" src="images/slots.png" />
+<p>Otherwise, if you take a look at Amazon's default supported slots in <a class="reference external" href="https://developer.amazon.com/docs/custom-skills/slot-type-reference.html">Slot Type Reference</a>, you can simply refer as <code>{A.SLOT_NAME}</code>.</p>
+<img alt="images/amazon_slots.png" class="doc-img" src="images/amazon_slots.png" />
+</div>
+<div class="section" id="id1">
+<h2>Custom Entities</h2>
+<p>If you're making your own slots, be sure to define the custom entities in a separate sheet. Makeskill will automatically render the new interaction model with your canned values.</p>
+<img alt="images/custom_entities.png" class="doc-img" src="images/custom_entities.png" />
+</div>
+</div>
+<div class="doc-test section" id="how-to">
+<h1>How To</h1>
+<p>You can find  many examples in our <a class="reference external" href="./index.html#id4">gallery</a> to deconstruct.</p>
+<div class="section" id="create-a-batch">
+<h2>Create a Batch</h2>
+<div class="section" id="step-1-fill-out-the-google-sheets">
+<h3>Step 1: Fill out the Google Sheets</h3>
+<img alt="images/vui_1_skill.png" class="doc-img" src="images/vui_1_skill.png" />
+<p>For an individual 1-turn Skill, simply fill out your spreadsheet to mimic the following
+layout for sheet name &quot;VUI&quot;.  Replace with your Skill's Intents, include utterance variations, and ensure the
+corresponding responses line up with those intents.</p>
+<img alt="images/cards_1_skill.png" class="doc-img" src="images/cards_1_skill.png" />
+<p>Multimodality is optional in Makeskill. If enabled, you'll need a spreadsheet that looks similar to this for sheet name &quot;Cards&quot;. See Early Support for Multimodality section for more details.</p>
+</div>
+<div class="section" id="step-2-export-the-skill">
+<h3>Step 2: Export the Skill</h3>
+<p>When you are finished editing your Google Spreadsheet, you'll need to run the makeskill command
+from the Makeskill root folder.</p>
+<dl class="docutils">
+<dt>Export the default batch (based on config file):</dt>
+<dd><pre class="code highlight first last literal-block">
+makeskill --config [config location]
+</pre>
+</dd>
+</dl>
+</div>
+<div class="section" id="step-3-deploy">
+<h3>Step 3: Deploy</h3>
+<p>Now you're ready to deploy. Switch to the project root folder to interact with ASK CLI.</p>
+<dl class="docutils">
+<dt>Deploy your prototype (from project root folder):</dt>
+<dd><pre class="code highlight first last literal-block">
+cd ..
+ask deploy
+</pre>
+</dd>
+</dl>
+<p>You can now test locally via your device or preferred simulator.</p>
+</div>
+</div>
+<div class="section" id="create-multiple-batches">
+<h2>Create Multiple Batches</h2>
+<div class="section" id="step-1-prepare-your-batches">
+<h3>Step 1: Prepare Your Batches</h3>
+<img alt="images/vui_sheet.png" class="doc-img" src="images/vui_sheet.png" />
+<p>The philosophy behind Makeskill is the ability to design in bulk in order to pump out multiple
+Skill experiments. In this sample for sheet name &quot;VUI&quot;, a user can export either batch A, B, or C to acquire a corresponding Skill to deploy. When designing multiple batches, the recommendation is to design 3 batch variations at a time with 1 batch being a control.  If needed, Makeskill can account for batches A-Z.  Currently, a developer can export one of the variations at a time.</p>
+<img alt="images/card_sheet.png" class="doc-img" src="images/card_sheet.png" />
+<p>Here, we see a sheet name &quot;Cards&quot; that contains public links to card assets.  Each card asset column represents a batch.</p>
+</div>
+<div class="section" id="step-2-export-your-batch">
+<h3>Step 2: Export Your Batch</h3>
+<dl class="docutils">
+<dt>Let's say you wanted to export Batch C:</dt>
+<dd><pre class="code highlight first last literal-block">
+makeskill --config [config location] --batch C
+</pre>
+</dd>
+</dl>
+</div>
+<div class="section" id="id3">
+<h3>Step 3: Deploy</h3>
+<p>Switch to the project root folder. Then you can deploy away.</p>
+<dl class="docutils">
+<dt>Deploy your prototype (from project root folder):</dt>
+<dd><pre class="code highlight first last literal-block">
+cd ..
+ask deploy
+</pre>
+</dd>
+</dl>
+<p>You can now test locally via your device or preferred simulator.</p>
+</div>
+</div>
+<div class="section" id="embed-ssml-speechcons">
+<h2>Embed SSML Speechcons</h2>
+<p>These response batches will automatically be wrapped in SSML, so a user can also embed
+<a class="reference external" href="https://developer.amazon.com/docs/custom-skills/speechcon-reference-interjections-english-us.html">Speechcons</a>
+in the spreadsheet batches to add humanization to Alexa's answers. Use single quotes within your markup.</p>
+<blockquote>
+<pre class="code highlight literal-block">
+&lt;say-as interpret-as='interjection'&gt;aw man&lt;/say as&gt;! We ran out of chocolate pie!
+</pre>
+</blockquote>
+</div>
+</div>
+<div class="doc-test section" id="evolutionary-prototyping">
+<h1>Evolutionary Prototyping</h1>
+<p>When you are finished with testing out your Skill concepts in a rapid fashion, you are free to evolve the autogenerated code however you see fit.  Makeskill is simply a scaffold for your project, but you'll be responsible for making the code production-ready.</p>
+<p>For multimodality, refer to the list of body templates and upgrade the directives for the respective intents you want new cards for in your generated Lambda file.  See <a class="reference external" href="https://developer.amazon.com/docs/custom-skills/display-interface-reference.html">Display Interface Reference</a>.</p>
+<p class="mini-footer">Yahoo 2018 - MIT License</p>
+</div>
+</div>
+</div>
+
+<!-- Bootstrap core JavaScript ============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+<!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script>
+  var shiftWindow = function() { scrollBy(0, -140) };
+  window.addEventListener("hashchange", shiftWindow);
+  function load() { if (window.location.hash) shiftWindow(); }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+.DS_Store
+node_modules
+client_secret.json
+package-lock.json
+config.json
+output

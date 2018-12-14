@@ -1,0 +1,222 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "yahoo mail",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateSettingsIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.ScrollDownIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.ScrollUpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.ScrollLeftIntent",
+          "samples": [
+
+          ]
+        },
+        {
+            "name": "AMAZON.MoreIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.PageDownIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.ScrollRightIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.PageUpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "FlightTimeIntent",
+          "slots": [
+              {
+                      "name": "dontAt",
+                      "type": "DONT_AT_ME",
+                      "samples": [
+                        "Which gate is my next flight arriving {dontAt}",
+                        "Where am I leaving for JFK today {dontAt} Fort-worth"
+                      ]
+              },
+              {
+                      "name": "LetMe",
+                      "type": "LET_ME",
+                      "samples": [
+                          "let me hear it",
+                          "yeah"
+                      ]
+              },
+              {
+                      "name": "yesNo",
+                      "type": "YES_NO",
+                      "samples": [
+                          "{yesNo}",
+                          "sure"
+                      ]
+              }
+          ],
+          "samples": [
+            "Which gate is my next flight arriving at",
+            "Where am I leaving for JFK today at Fort-worth"
+          ]
+        }
+      ],
+      "types": [
+        {
+            "name": "DONT_AT_ME",
+            "values": [
+              {
+                      "name": {
+                        "value": "at"
+                      }
+              }
+            ]
+        },
+        {
+            "name": "YES_NO",
+            "values": [
+              {
+                      "name": {
+                        "value": "Yes"
+                      }
+              },
+              {
+                      "name": {
+                        "value": "No"
+                      }
+              }
+            ]
+        },
+        {
+            "name": "LET_ME",
+            "values": [
+              {
+                      "name": {
+                        "value": "let me hear it"
+                      }
+              },
+              {
+                      "name": {
+                        "value": "go for it"
+                      }
+              },
+              {
+                      "name": {
+                        "value": "Yes"
+                      }
+              }
+            ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "FlightTimeIntent",
+          "confirmationRequired": false,
+          "prompts":{},
+          "slots": [
+            {
+              "name": "dontAt",
+              "type": "DONT_AT_ME",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FlightTimeIntent.IntentSlot-dontAt"
+              }
+            },
+            {
+              "name": "LetMe",
+              "type": "LET_ME",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FlightTimeIntent.IntentSlot-letMe"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+      "id": "Elicit.Intent-FlightTimeIntent.IntentSlot-dontAt",
+      "variations": [
+        {
+          "type": "SSML",
+          "value": "<speak>Your flight to JFK will depart from  <emphasis level=\"moderate\"> Terminal N, Gate 14.</emphasis> <break time=\"2s\"/> <audio src='https://s3.amazonaws.com/ask-soundlibrary/musical/amzn_sfx_bell_short_chime_01.mp3'/> </speak>"
+        }
+       ]
+      },
+     {
+     "id": "Elicit.Intent-FlightTimeIntent.IntentSlot-letMe",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "Due to a heavy storm, your flight from Fort-worth to JFK has been delayed by an estimated one hour and thirty minutes. Would you like me to notify Samantha?"
+       }
+      ]
+    }
+    ]
+  }
+}
