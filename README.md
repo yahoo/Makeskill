@@ -38,10 +38,11 @@ Makeskill includes the following features:
 * Google Spreadsheets / [API Key Docs](https://developers.google.com/sheets/api/guides/authorizing)
 
 
-### Install the NPM Package
-In the root level of your target directory (e.g. an Alexa Skills Kit CLI template folder):
+### After Downloading the Repository
+In the root level of your target directory (e.g. an Alexa Skills Kit CLI template folder), add the Makeskill repository.
+
+Before you can use the makeskill tool, you'll need to link:
 ```sh
-  npm install makeskill
   npm link
 ```
 
@@ -50,11 +51,11 @@ Then in the Makeskill folder, install all of its node module dependencies
   cd makeskill
   npm install
 ```
+
 ## Configuration
 
 You can use the mdk_starter script to generate the Makeskill config file.
 ```sh
-$ npm install
 $ chmod u+x mdk_starter.js
 $ ./mdk_starter
 ```
